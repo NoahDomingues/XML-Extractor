@@ -1,7 +1,6 @@
 ﻿<ResourceDictionary
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-  xmlns:sys="clr-namespace:System;assembly=mscorlib">
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!-- CORE PALETTE -->
     <SolidColorBrush x:Key="WindowBackground"  Color="#121212"/>
@@ -14,8 +13,12 @@
         <Setter Property="Background"   Value="{StaticResource AccentRed}"/>
         <Setter Property="Foreground"   Value="{StaticResource TextLight}"/>
         <Setter Property="BorderBrush"  Value="{x:Null}"/>
-        <Setter Property="Padding"      Value="10,6"/>
+        <Setter Property="Padding"      Value="12,8"/>
         <Setter Property="Margin"       Value="4"/>
+        <Setter Property="MinHeight"    Value="40"/>
+        <!-- ensures vertical comfort -->
+        <Setter Property="FontSize"     Value="14"/>
+        <!-- larger text -->
         <Setter Property="FontWeight"   Value="SemiBold"/>
         <Setter Property="Cursor"       Value="Hand"/>
         <Setter Property="Template">
@@ -64,10 +67,9 @@
 
     <!-- PROGRESSBAR STYLE (simplified) -->
     <Style TargetType="ProgressBar">
-        <Setter Property="Height"     Value="4"/>
-        <Setter Property="Margin"     Value="0,8"/>
-        <Setter Property="Background" Value="#333333"/>
-        <Setter Property="Foreground" Value="{StaticResource AccentRed}"/>
+        <Setter Property="Height"       Value="4"/>
+        <Setter Property="Margin"       Value="0,8"/>
+        <Setter Property="Background"   Value="#333333"/>
+        <Setter Property="Foreground"   Value="{StaticResource AccentRed}"/>
     </Style>
-
 </ResourceDictionary>

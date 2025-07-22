@@ -11,33 +11,77 @@
     <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
-            <!-- Buttons -->
+            <!-- Title -->
+            <RowDefinition Height="Auto"/>
+            <!-- Select buttons -->
+            <RowDefinition Height="Auto"/>
+            <!-- Extract button -->
             <RowDefinition Height="Auto"/>
             <!-- ProgressBar -->
             <RowDefinition/>
             <!-- Log box -->
         </Grid.RowDefinitions>
 
-        <!-- Buttons Panel -->
-        <StackPanel Orientation="Horizontal">
-            <Button x:Name="BtnSelectFile"   Click="BtnSelectFile_Click">Select File…</Button>
-            <Button x:Name="BtnSelectFolder" Click="BtnSelectFolder_Click">Select Folder…</Button>
-            <Button x:Name="BtnExtract"      Click="BtnExtract_Click" IsEnabled="False">Extract</Button>
-        </StackPanel>
+        <!-- 1. Title -->
+        <TextBlock
+      Grid.Row="0"
+      Text="XML Extractor"
+      FontSize="20"
+      FontWeight="Bold"
+      Foreground="{StaticResource TextLight}"
+      HorizontalAlignment="Center"
+      Margin="0,0,0,12"/>
 
-        <!-- Determinate/Indeterminate ProgressBar -->
+        <!-- 2. Select File & Folder -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- NO Content="…" ATTRIBUTE → use inner text only -->
+            <Button
+        Grid.Column="0"
+        x:Name="BtnSelectFile"
+        Click="BtnSelectFile_Click"
+        HorizontalAlignment="Stretch"
+        Margin="0,0,4,0">
+                Select File…
+            </Button>
+
+            <Button
+        Grid.Column="1"
+        x:Name="BtnSelectFolder"
+        Click="BtnSelectFolder_Click"
+        HorizontalAlignment="Stretch"
+        Margin="4,0,0,0">
+                Select Folder…
+            </Button>
+        </Grid>
+
+        <!-- 3. Extract (full width) -->
+        <Button
+      Grid.Row="2"
+      x:Name="BtnExtract"
+      Click="BtnExtract_Click"
+      HorizontalAlignment="Stretch"
+      Margin="0,8,0,0"
+      IsEnabled="False">
+            Extract
+        </Button>
+
+        <!-- 4. ProgressBar (always visible) -->
         <ProgressBar
+      Grid.Row="3"
       x:Name="ExtractionProgress"
-      Grid.Row="1"
       Minimum="0"
       Maximum="1"
-      Value="0"
-      Visibility="Collapsed"/>
+      Value="0"/>
 
-        <!-- Logs -->
+        <!-- 5. Log output -->
         <TextBox
+      Grid.Row="4"
       x:Name="LogBox"
-      Grid.Row="2"
       Margin="0,8,0,0"
       TextWrapping="Wrap"
       VerticalScrollBarVisibility="Auto"
