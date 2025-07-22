@@ -3,10 +3,11 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Forms;       // ← Add this
+using Microsoft.Win32;               // WPF OpenFileDialog
+using WinForms = System.Windows.Forms; // alias for FolderBrowserDialog
 using System.Xml;
 
-namespace XML_Extractor               // ← Matches your Default namespace
+namespace XML_Extractor
 {
     public partial class MainWindow : Window
     {
@@ -29,10 +30,12 @@ namespace XML_Extractor               // ← Matches your Default namespace
 
         private void BtnSelectFile_Click(object sender, RoutedEventArgs e)
         {
-            var dlg = new Microsoft.Win32.OpenFileDialog
+            var dlg = new OpenFileDialog
             {
-                Title = "Select File to Scan"
+                Title = "Select File to Scan",
+                Filter = "All files (*.*)|*.*"
             };
+
             if (dlg.ShowDialog() == true)
             {
                 _singleFilePath = dlg.FileName;
@@ -44,16 +47,19 @@ namespace XML_Extractor               // ← Matches your Default namespace
 
         private void BtnSelectFolder_Click(object sender, RoutedEventArgs e)
         {
-            using (var dlg = new FolderBrowserDialog())
+            using var dlg = new WinForms.FolderBrowserDialog
             {
-                dlg.Description = "Select folder to scan";
-                if (dlg.ShowDialog() == System.Windows.Forms.DialogResult.OK)
-                {
-                    _folderPath = dlg.SelectedPath;
-                    _singleFilePath = null;
-                    Log($"Selected folder: {_folderPath}");
-                    BtnExtract.IsEnabled = true;
-                }
+                Description = "Select folder to scan",
+                UseDescriptionForTitle = true
+            };
+
+            // WinForms.ShowDialog() returns DialogResult, not bool
+            if (dlg.ShowDialog() == WinForms.DialogResult.OK)
+            {
+                _folderPath = dlg.SelectedPath;
+                _singleFilePath = null;
+                Log($"Selected folder: {_folderPath}");
+                BtnExtract.IsEnabled = true;
             }
         }
 
@@ -106,7 +112,10 @@ namespace XML_Extractor               // ← Matches your Default namespace
                 {
                     int start = m.Index;
                     string snippet = text.Substring(start);
-                    var rootMatch = Regex.Match(snippet, @"<\?xml version=""1\.0""\?>\s*<(\w+)");
+                    var rootMatch = Regex.Match(
+                        snippet,
+                        @"<\?xml version=""1\.0""\?>\s*<(\w+)"
+                    );
 
                     if (!rootMatch.Success)
                     {
@@ -138,14 +147,17 @@ namespace XML_Extractor               // ← Matches your Default namespace
                             NewLineHandling = NewLineHandling.Replace
                         };
 
-                        string safeFolder = Path.Combine(Path.GetDirectoryName(filePath), "Extracted_XMLs");
-                        Directory.CreateDirectory(safeFolder);
+                        string outputDir = Path.Combine(
+                            Path.GetDirectoryName(filePath)!,
+                            "Extracted_XMLs"
+                        );
+                        Directory.CreateDirectory(outputDir);
 
                         count++;
                         string filename = $"{rootTag}_{count:00}.xml";
-                        string outPath = Path.Combine(safeFolder, filename);
-                        using (var writer = XmlWriter.Create(outPath, settings))
-                            doc.Save(writer);
+                        string outPath = Path.Combine(outputDir, filename);
+                        using var writer = XmlWriter.Create(outPath, settings);
+                        doc.Save(writer);
 
                         Log($"📄 Saved {filename}");
                     }

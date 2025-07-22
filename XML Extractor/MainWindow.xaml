@@ -9,8 +9,11 @@
     <Grid Margin="12">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
+            <!-- Buttons -->
             <RowDefinition Height="Auto"/>
+            <!-- ProgressBar -->
             <RowDefinition/>
+            <!-- Log box -->
         </Grid.RowDefinitions>
 
         <!-- Button panel -->
@@ -21,25 +24,24 @@
             <Button x:Name="BtnSelectFolder" Click="BtnSelectFolder_Click">
                 Select Folder…
             </Button>
-            <Button x:Name="BtnExtract" Click="BtnExtract_Click" IsEnabled="False">
+            <Button x:Name="BtnExtract" Click="BtnExtract_Click"
+              IsEnabled="False">
                 Extract
             </Button>
         </StackPanel>
 
         <!-- Indeterminate ProgressBar -->
-        <ProgressBar
-      x:Name="ExtractionProgress"
-      Grid.Row="1"
-      IsIndeterminate="True"
-      Visibility="Collapsed"/>
+        <ProgressBar x:Name="ExtractionProgress"
+                 Grid.Row="1"
+                 IsIndeterminate="True"
+                 Visibility="Collapsed"/>
 
         <!-- Log output -->
-        <TextBox
-      x:Name="LogBox"
-      Grid.Row="2"
-      Margin="0,8,0,0"
-      TextWrapping="Wrap"
-      VerticalScrollBarVisibility="Auto"
-      IsReadOnly="True"/>
+        <TextBox x:Name="LogBox"
+             Grid.Row="2"
+             Margin="0,8,0,0"
+             TextWrapping="Wrap"
+             VerticalScrollBarVisibility="Auto"
+             IsReadOnly="True"/>
     </Grid>
 </Window>
