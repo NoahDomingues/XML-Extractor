@@ -16,32 +16,27 @@
             <!-- Log box -->
         </Grid.RowDefinitions>
 
-        <!-- Button panel -->
         <StackPanel Orientation="Horizontal">
-            <Button x:Name="BtnSelectFile" Click="BtnSelectFile_Click">
-                Select File…
-            </Button>
-            <Button x:Name="BtnSelectFolder" Click="BtnSelectFolder_Click">
-                Select Folder…
-            </Button>
-            <Button x:Name="BtnExtract" Click="BtnExtract_Click"
-              IsEnabled="False">
-                Extract
-            </Button>
+            <Button x:Name="BtnSelectFile"   Click="BtnSelectFile_Click">Select File…</Button>
+            <Button x:Name="BtnSelectFolder" Click="BtnSelectFolder_Click">Select Folder…</Button>
+            <Button x:Name="BtnExtract"      Click="BtnExtract_Click" IsEnabled="False">Extract</Button>
         </StackPanel>
 
-        <!-- Indeterminate ProgressBar -->
-        <ProgressBar x:Name="ExtractionProgress"
-                 Grid.Row="1"
-                 IsIndeterminate="True"
-                 Visibility="Collapsed"/>
+        <ProgressBar
+      x:Name="ExtractionProgress"
+      Grid.Row="1"
+      Minimum="0"
+      Maximum="1"
+      Value="0"
+      Visibility="Collapsed"
+      Height="4" />
 
-        <!-- Log output -->
-        <TextBox x:Name="LogBox"
-             Grid.Row="2"
-             Margin="0,8,0,0"
-             TextWrapping="Wrap"
-             VerticalScrollBarVisibility="Auto"
-             IsReadOnly="True"/>
+        <TextBox
+      x:Name="LogBox"
+      Grid.Row="2"
+      Margin="0,8,0,0"
+      TextWrapping="Wrap"
+      VerticalScrollBarVisibility="Auto"
+      IsReadOnly="True"/>
     </Grid>
 </Window>
