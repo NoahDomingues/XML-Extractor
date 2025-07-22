@@ -4,6 +4,33 @@
              xmlns:local="clr-namespace:XML_Extractor"
              StartupUri="MainWindow.xaml">
     <Application.Resources>
-         
+        <!-- Dark background -->
+        <SolidColorBrush x:Key="WindowBackground" Color="#1E1E1E"/>
+        <!-- Red accent -->
+        <SolidColorBrush x:Key="AccentRed" Color="#E53935"/>
+        <!-- Light text -->
+        <SolidColorBrush x:Key="TextLight" Color="#EEEEEE"/>
+        <!-- Button styles -->
+        <Style TargetType="Button">
+            <Setter Property="Foreground" Value="{StaticResource TextLight}"/>
+            <Setter Property="Background" Value="{StaticResource AccentRed}"/>
+            <Setter Property="Margin" Value="4"/>
+            <Setter Property="Padding" Value="8,4"/>
+            <Setter Property="FontWeight" Value="SemiBold"/>
+        </Style>
+        <!-- TextBox style for log -->
+        <Style TargetType="TextBox">
+            <Setter Property="Foreground" Value="{StaticResource TextLight}"/>
+            <Setter Property="Background" Value="#2D2D30"/>
+            <Setter Property="FontFamily" Value="Consolas"/>
+            <Setter Property="FontSize" Value="12"/>
+        </Style>
+        <!-- ProgressBar style -->
+        <Style TargetType="ProgressBar">
+            <Setter Property="Foreground" Value="{StaticResource AccentRed}"/>
+            <Setter Property="Background" Value="#333333"/>
+            <Setter Property="Height" Value="4"/>
+            <Setter Property="Margin" Value="0,8"/>
+        </Style>
     </Application.Resources>
 </Application>
