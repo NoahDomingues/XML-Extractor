@@ -3,8 +3,10 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
   Title="XML Extractor"
-  Width="700" Height="500"
-  Background="{StaticResource WindowBackground}">
+  Width="600" Height="400"
+  MinWidth="480" MinHeight="320"
+  Background="{StaticResource WindowBackground}"
+  WindowStartupLocation="CenterScreen">
 
     <Grid Margin="12">
         <Grid.RowDefinitions>
@@ -16,21 +18,23 @@
             <!-- Log box -->
         </Grid.RowDefinitions>
 
+        <!-- Buttons Panel -->
         <StackPanel Orientation="Horizontal">
             <Button x:Name="BtnSelectFile"   Click="BtnSelectFile_Click">Select File…</Button>
             <Button x:Name="BtnSelectFolder" Click="BtnSelectFolder_Click">Select Folder…</Button>
             <Button x:Name="BtnExtract"      Click="BtnExtract_Click" IsEnabled="False">Extract</Button>
         </StackPanel>
 
+        <!-- Determinate/Indeterminate ProgressBar -->
         <ProgressBar
       x:Name="ExtractionProgress"
       Grid.Row="1"
       Minimum="0"
       Maximum="1"
       Value="0"
-      Visibility="Collapsed"
-      Height="4" />
+      Visibility="Collapsed"/>
 
+        <!-- Logs -->
         <TextBox
       x:Name="LogBox"
       Grid.Row="2"
