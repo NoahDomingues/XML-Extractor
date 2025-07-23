@@ -6,6 +6,8 @@ using System.Windows;
 using Microsoft.Win32;                   // WPF OpenFileDialog
 using WinForms = System.Windows.Forms;   // alias for FolderBrowserDialog
 using System.Xml;
+using System.Diagnostics;
+using System.Windows.Navigation;
 
 namespace XML_Extractor
 {
