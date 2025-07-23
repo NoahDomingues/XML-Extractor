@@ -43,6 +43,7 @@
         </TextBlock>
 
         <!-- Social icons -->
+        <!-- Social icons -->
         <Grid Margin="0,15,0,0" HorizontalAlignment="Center">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -52,30 +53,30 @@
 
             <!-- Discord -->
             <Image Grid.Column="0"
-                   Source="pack://application:,,,/Assets/discord.png"
-                   Width="32" Height="32"
-                   Margin="5"
-                   Cursor="Hand"
-                   ToolTip="Modding Discord"
-                   MouseLeftButtonUp="DiscordIcon_Click"/>
+           Source="pack://application:,,,/Assets/discord.png"
+           Width="32" Height="32"
+           Margin="5"
+           Cursor="Hand"
+           ToolTip="Modding Discord"
+           MouseLeftButtonUp="DiscordIcon_Click"/>
+
+            <!-- YouTube -->
+            <Image Grid.Column="1"
+           Source="pack://application:,,,/Assets/youtube.png"
+           Width="32" Height="32"
+           Margin="5"
+           Cursor="Hand"
+           ToolTip="YouTube channel"
+           MouseLeftButtonUp="YouTubeIcon_Click"/>
 
             <!-- GitHub -->
-            <Image Grid.Column="1"
-                   Source="pack://application:,,,/Assets/github.png"
-                   Width="32" Height="32"
-                   Margin="5"
-                   Cursor="Hand"
-                   ToolTip="GitHub repository"
-                   MouseLeftButtonUp="GitHubIcon_Click"/>
-
-            <!-- Website (optional) -->
             <Image Grid.Column="2"
-                   Source="pack://application:,,,/Assets/website.png"
-                   Width="32" Height="32"
-                   Margin="5"
-                   Cursor="Hand"
-                   ToolTip="Project website"
-                   MouseLeftButtonUp="WebsiteIcon_Click"/>
+           Source="pack://application:,,,/Assets/github.png"
+           Width="32" Height="32"
+           Margin="5"
+           Cursor="Hand"
+           ToolTip="GitHub repository"
+           MouseLeftButtonUp="GitHubIcon_Click"/>
         </Grid>
     </StackPanel>
 </Window>

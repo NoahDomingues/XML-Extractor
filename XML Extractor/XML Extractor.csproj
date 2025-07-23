@@ -9,9 +9,15 @@
 		<RootNamespace>XML_Extractor</RootNamespace>
 	</PropertyGroup>
 	<ItemGroup>
+	  <None Remove="Assets\discord.png" />
+	  <None Remove="Assets\github.png" />
+	  <None Remove="Assets\youtube.png" />
 	  <None Remove="Resources\RedHatDisplay-Bold.ttf" />
 	</ItemGroup>
 	<ItemGroup>
+	  <Resource Include="Assets\discord.png" />
+	  <Resource Include="Assets\github.png" />
+	  <Resource Include="Assets\youtube.png" />
 	  <Resource Include="Resources\RedHatDisplay-Bold.ttf" />
 	</ItemGroup>
 </Project>
