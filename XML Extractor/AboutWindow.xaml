@@ -1,12 +1,83 @@
-﻿<Window x:Class="XML_Extractor.AboutWindow"
+﻿<!-- AboutWindow.xaml -->
+<Window x:Class="STF_DDS_Converter.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:XML_Extractor"
-        mc:Ignorable="d"
-        Title="AboutWindow" Height="450" Width="800">
-    <Grid>
-        
-    </Grid>
+        Title="About STF ↔ DDS Converter"
+        Width="400"
+        Height="360"
+        ResizeMode="NoResize"
+        WindowStartupLocation="CenterOwner"
+        Background="{DynamicResource SurfaceBrush}"
+        Foreground="{DynamicResource TextBrush}"
+        FontFamily="{DynamicResource PrimaryFontFamily}"
+        ShowInTaskbar="False">
+
+    <StackPanel Margin="20" HorizontalAlignment="Center">
+
+        <!-- Logo (click opens GitHub) -->
+        <Image Source="pack://application:,,,/Assets/logo.png"
+           Width="64" Height="64"
+           Margin="0,0,0,10"
+           Cursor="Hand"
+           ToolTip="STF ↔ DDS Converter on GitHub"
+           MouseLeftButtonUp="Logo_Click"/>
+
+        <!-- App Title -->
+        <TextBlock Text="STF ↔ DDS Converter"
+               FontSize="20"
+               FontWeight="Black"
+               Margin="0,0,0,10"
+               TextAlignment="Center" ToolTip="STF ↔ DDS Converter"/>
+
+        <!-- Description -->
+        <TextBlock TextWrapping="Wrap"
+               FontSize="14"
+               TextAlignment="Center"
+               Margin="0,0,0,10">
+      A simple tool for converting between STF (.stf) and DDS (.dds) textures.  
+      Originally designed to support texture modding in Operation Flashpoint: Dragon Rising and Red River.
+        </TextBlock>
+
+        <!-- Footer text -->
+        <TextBlock FontSize="12"
+               TextAlignment="Center" ToolTip="© Noah Domingues">
+      Created by Noah Domingues • v1.0
+        </TextBlock>
+
+        <!-- Social icons -->
+        <Grid Margin="0,15,0,0" HorizontalAlignment="Center">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <!-- Discord -->
+            <Image Grid.Column="0"
+             Source="pack://application:,,,/Assets/discord.png"
+             Width="32" Height="32"
+             Margin="5"
+             Cursor="Hand"
+             ToolTip="Operation Flashpoint Discord server"
+             MouseLeftButtonUp="DiscordIcon_Click"/>
+
+            <!-- YouTube -->
+            <Image Grid.Column="1"
+             Source="pack://application:,,,/Assets/youtube.png"
+             Width="32" Height="32"
+             Margin="5"
+             Cursor="Hand"
+             ToolTip="YouTube channel"
+             MouseLeftButtonUp="YouTubeIcon_Click"/>
+
+            <!-- GitHub -->
+            <Image Grid.Column="2"
+             Source="pack://application:,,,/Assets/github.png"
+             Width="32" Height="32"
+             Margin="5"
+             Cursor="Hand"
+             ToolTip="GitHub repository"
+             MouseLeftButtonUp="GitHubIcon_Click"/>
+        </Grid>
+    </StackPanel>
 </Window>
