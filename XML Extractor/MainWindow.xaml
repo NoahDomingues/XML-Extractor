@@ -86,5 +86,35 @@
       TextWrapping="Wrap"
       VerticalScrollBarVisibility="Auto"
       IsReadOnly="True"/>
+        <!-- Footer links -->
+        <StackPanel Grid.Row="5"
+            Orientation="Horizontal"
+            HorizontalAlignment="Right"
+            VerticalAlignment="Center"
+            Margin="0,10,0,0">
+
+            <TextBlock Margin="0,0,10,0" VerticalAlignment="Center" ToolTip="About XML Extractor">
+        <Hyperlink Click="AboutLink_Click"
+                   Foreground="{StaticResource AccentRed}">
+            About
+        </Hyperlink>
+            </TextBlock>
+
+            <TextBlock Margin="0,0,10,0" VerticalAlignment="Center" ToolTip="Modding Community Discord">
+        <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"
+                   NavigateUri="https://discord.gg/Z88NnTgpWU"
+                   Foreground="{StaticResource AccentRed}">
+            Discord
+        </Hyperlink>
+            </TextBlock>
+
+            <TextBlock VerticalAlignment="Center" ToolTip="GitHub Repository">
+        <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"
+                   NavigateUri="https://github.com/NoahDomingues/XML-Extractor"
+                   Foreground="{StaticResource AccentRed}">
+            GitHub
+        </Hyperlink>
+            </TextBlock>
+        </StackPanel>
     </Grid>
 </Window>

@@ -230,5 +230,23 @@ namespace XML_Extractor
             Directory.CreateDirectory(outputDir);
             return outputDir;
         }
+
+        // About link click handler
+        private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
+        {
+            Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
+            e.Handled = true;
+        }
+
+        private void AboutLink_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show(
+                "XML Extractor\n\nCreated by Noah Domingues\nVersion 1.0\n\nExtracts embedded XML from EXE/container files with pretty formatting.",
+                "About XML Extractor",
+                MessageBoxButton.OK,
+                MessageBoxImage.Information
+            );
+        }
+
     }
 }
