@@ -2,23 +2,37 @@
   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- CORE PALETTE -->
+    <!-- 1. FONT FAMILY RESOURCE -->
+    <!-- 
+    The part after “#” must match the font’s internal name. 
+    Double-click your TTF to confirm it reads “Red Hat Display Bold”.
+  -->
+    <FontFamily x:Key="RedHatBold">
+        pack://application:,,,/Resources/#Red Hat Display Bold
+    </FontFamily>
+
+    <!-- 2. CORE PALETTE -->
     <SolidColorBrush x:Key="WindowBackground"  Color="#121212"/>
     <SolidColorBrush x:Key="ControlBackground" Color="#1F1F1F"/>
     <SolidColorBrush x:Key="AccentRed"         Color="#D32F2F"/>
     <SolidColorBrush x:Key="TextLight"          Color="#E0E0E0"/>
 
-    <!-- BUTTON STYLE -->
+    <!-- 3. GLOBAL TextBlock STYLE (uses custom font) -->
+    <Style TargetType="TextBlock">
+        <Setter Property="FontFamily" Value="{StaticResource RedHatBold}"/>
+        <Setter Property="Foreground"  Value="{StaticResource TextLight}"/>
+    </Style>
+
+    <!-- 4. BUTTON STYLE -->
     <Style TargetType="Button">
+        <Setter Property="FontFamily"   Value="{StaticResource RedHatBold}"/>
         <Setter Property="Background"   Value="{StaticResource AccentRed}"/>
         <Setter Property="Foreground"   Value="{StaticResource TextLight}"/>
         <Setter Property="BorderBrush"  Value="{x:Null}"/>
         <Setter Property="Padding"      Value="12,8"/>
         <Setter Property="Margin"       Value="4"/>
         <Setter Property="MinHeight"    Value="40"/>
-        <!-- ensures vertical comfort -->
         <Setter Property="FontSize"     Value="14"/>
-        <!-- larger text -->
         <Setter Property="FontWeight"   Value="SemiBold"/>
         <Setter Property="Cursor"       Value="Hand"/>
         <Setter Property="Template">
@@ -42,11 +56,11 @@
         </Style.Triggers>
     </Style>
 
-    <!-- TEXTBOX STYLE -->
+    <!-- 5. TEXTBOX STYLE -->
     <Style TargetType="TextBox">
         <Setter Property="Background"      Value="{StaticResource ControlBackground}"/>
         <Setter Property="Foreground"      Value="{StaticResource TextLight}"/>
-        <Setter Property="FontFamily"      Value="Consolas"/>
+        <Setter Property="FontFamily"      Value="{StaticResource RedHatBold}"/>
         <Setter Property="FontSize"        Value="12"/>
         <Setter Property="BorderBrush"     Value="#333333"/>
         <Setter Property="BorderThickness" Value="1"/>
@@ -65,11 +79,12 @@
         </Setter>
     </Style>
 
-    <!-- PROGRESSBAR STYLE (simplified) -->
+    <!-- 6. PROGRESSBAR STYLE -->
     <Style TargetType="ProgressBar">
-        <Setter Property="Height"       Value="4"/>
-        <Setter Property="Margin"       Value="0,8"/>
-        <Setter Property="Background"   Value="#333333"/>
-        <Setter Property="Foreground"   Value="{StaticResource AccentRed}"/>
+        <Setter Property="Height"     Value="4"/>
+        <Setter Property="Margin"     Value="0,8"/>
+        <Setter Property="Background" Value="#333333"/>
+        <Setter Property="Foreground" Value="{StaticResource AccentRed}"/>
     </Style>
+
 </ResourceDictionary>

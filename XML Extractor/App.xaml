@@ -7,7 +7,7 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <!-- relative to the project root -->
+                <!-- merges your dark/red theme -->
                 <ResourceDictionary Source="Themes/DarkRedTheme.xaml"/>
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>

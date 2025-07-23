@@ -8,4 +8,10 @@
 		<!-- pulls in System.Windows.Forms -->
 		<RootNamespace>XML_Extractor</RootNamespace>
 	</PropertyGroup>
+	<ItemGroup>
+	  <None Remove="Resources\RedHatDisplay-Bold.ttf" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Resource Include="Resources\RedHatDisplay-Bold.ttf" />
+	</ItemGroup>
 </Project>
