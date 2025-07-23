@@ -25,9 +25,9 @@ namespace XML_Extractor
             Open("https://github.com/NoahDomingues/XML-Extractor");
         }
 
-        private void WebsiteIcon_Click(object sender, RoutedEventArgs e)
+        private void YouTubeIcon_Click(object sender, RoutedEventArgs e)
         {
-            Open("https://noahdomingues.com/tools/xml-extractor"); // example
+            Open("https://www.youtube.com/@NoahDomingues?sub_confirmation=1");
         }
 
         private void Open(string url)
