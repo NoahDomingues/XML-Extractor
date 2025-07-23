@@ -15,11 +15,13 @@
             <RowDefinition Height="Auto"/>
             <!-- Select buttons -->
             <RowDefinition Height="Auto"/>
-            <!-- Extract button -->
+            <!-- Extract -->
             <RowDefinition Height="Auto"/>
             <!-- ProgressBar -->
-            <RowDefinition/>
-            <!-- Log box -->
+            <RowDefinition Height="*"/>
+            <!-- LogBox -->
+            <RowDefinition Height="Auto"/>
+            <!-- Footer links -->
         </Grid.RowDefinitions>
 
         <!-- 1. Title -->
