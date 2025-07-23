@@ -1,47 +1,45 @@
-﻿<!-- AboutWindow.xaml -->
-<Window x:Class="STF_DDS_Converter.AboutWindow"
+﻿<Window x:Class="XML_Extractor.AboutWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="About STF ↔ DDS Converter"
+        Title="About XML Extractor"
         Width="400"
-        Height="360"
+        Height="340"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        Background="{DynamicResource SurfaceBrush}"
-        Foreground="{DynamicResource TextBrush}"
-        FontFamily="{DynamicResource PrimaryFontFamily}"
+        Background="{StaticResource WindowBackground}"
+        Foreground="{StaticResource TextLight}"
+        FontFamily="{StaticResource RedHatBold}"
         ShowInTaskbar="False">
 
     <StackPanel Margin="20" HorizontalAlignment="Center">
 
         <!-- Logo (click opens GitHub) -->
-        <Image Source="pack://application:,,,/Assets/logo.png"
-           Width="64" Height="64"
-           Margin="0,0,0,10"
-           Cursor="Hand"
-           ToolTip="STF ↔ DDS Converter on GitHub"
-           MouseLeftButtonUp="Logo_Click"/>
+        <Image Source="pack://application:,,,/Assets/extractor_logo.png"
+               Width="64" Height="64"
+               Margin="0,0,0,10"
+               Cursor="Hand"
+               ToolTip="XML Extractor on GitHub"
+               MouseLeftButtonUp="Logo_Click"/>
 
         <!-- App Title -->
-        <TextBlock Text="STF ↔ DDS Converter"
-               FontSize="20"
-               FontWeight="Black"
-               Margin="0,0,0,10"
-               TextAlignment="Center" ToolTip="STF ↔ DDS Converter"/>
+        <TextBlock Text="XML Extractor"
+                   FontSize="20"
+                   FontWeight="Bold"
+                   Margin="0,0,0,10"
+                   TextAlignment="Center"/>
 
         <!-- Description -->
         <TextBlock TextWrapping="Wrap"
-               FontSize="14"
-               TextAlignment="Center"
-               Margin="0,0,0,10">
-      A simple tool for converting between STF (.stf) and DDS (.dds) textures.  
-      Originally designed to support texture modding in Operation Flashpoint: Dragon Rising and Red River.
+                   FontSize="14"
+                   TextAlignment="Center"
+                   Margin="0,0,0,10">
+            A lightweight modding utility for extracting embedded XML blocks from EXE and container files. Built for precision and readability—because every tag matters.
         </TextBlock>
 
-        <!-- Footer text -->
+        <!-- Footer Text -->
         <TextBlock FontSize="12"
-               TextAlignment="Center" ToolTip="© Noah Domingues">
-      Created by Noah Domingues • v1.0
+                   TextAlignment="Center">
+            Created by Noah Domingues • v1.0
         </TextBlock>
 
         <!-- Social icons -->
@@ -54,30 +52,30 @@
 
             <!-- Discord -->
             <Image Grid.Column="0"
-             Source="pack://application:,,,/Assets/discord.png"
-             Width="32" Height="32"
-             Margin="5"
-             Cursor="Hand"
-             ToolTip="Operation Flashpoint Discord server"
-             MouseLeftButtonUp="DiscordIcon_Click"/>
-
-            <!-- YouTube -->
-            <Image Grid.Column="1"
-             Source="pack://application:,,,/Assets/youtube.png"
-             Width="32" Height="32"
-             Margin="5"
-             Cursor="Hand"
-             ToolTip="YouTube channel"
-             MouseLeftButtonUp="YouTubeIcon_Click"/>
+                   Source="pack://application:,,,/Assets/discord.png"
+                   Width="32" Height="32"
+                   Margin="5"
+                   Cursor="Hand"
+                   ToolTip="Modding Discord"
+                   MouseLeftButtonUp="DiscordIcon_Click"/>
 
             <!-- GitHub -->
+            <Image Grid.Column="1"
+                   Source="pack://application:,,,/Assets/github.png"
+                   Width="32" Height="32"
+                   Margin="5"
+                   Cursor="Hand"
+                   ToolTip="GitHub repository"
+                   MouseLeftButtonUp="GitHubIcon_Click"/>
+
+            <!-- Website (optional) -->
             <Image Grid.Column="2"
-             Source="pack://application:,,,/Assets/github.png"
-             Width="32" Height="32"
-             Margin="5"
-             Cursor="Hand"
-             ToolTip="GitHub repository"
-             MouseLeftButtonUp="GitHubIcon_Click"/>
+                   Source="pack://application:,,,/Assets/website.png"
+                   Width="32" Height="32"
+                   Margin="5"
+                   Cursor="Hand"
+                   ToolTip="Project website"
+                   MouseLeftButtonUp="WebsiteIcon_Click"/>
         </Grid>
     </StackPanel>
 </Window>

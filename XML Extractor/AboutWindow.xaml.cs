@@ -1,27 +1,38 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace XML_Extractor
 {
-    /// <summary>
-    /// Interaction logic for AboutWindow.xaml
-    /// </summary>
     public partial class AboutWindow : Window
     {
         public AboutWindow()
         {
             InitializeComponent();
+        }
+
+        private void Logo_Click(object sender, RoutedEventArgs e)
+        {
+            Open("https://github.com/NoahDomingues/XML-Extractor");
+        }
+
+        private void DiscordIcon_Click(object sender, RoutedEventArgs e)
+        {
+            Open("https://discord.gg/Z88NnTgpWU");
+        }
+
+        private void GitHubIcon_Click(object sender, RoutedEventArgs e)
+        {
+            Open("https://github.com/NoahDomingues/XML-Extractor");
+        }
+
+        private void WebsiteIcon_Click(object sender, RoutedEventArgs e)
+        {
+            Open("https://noahdomingues.com/tools/xml-extractor"); // example
+        }
+
+        private void Open(string url)
+        {
+            Process.Start(new ProcessStartInfo(url) { UseShellExecute = true });
         }
     }
 }
