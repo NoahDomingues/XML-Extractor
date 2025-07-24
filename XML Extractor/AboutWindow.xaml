@@ -33,7 +33,7 @@
                    FontSize="14"
                    TextAlignment="Center"
                    Margin="0,0,0,10">
-            A lightweight modding utility for extracting embedded XML blocks from EXE and container files. Built for precision and readability—because every tag matters.
+            A lightweight utility for extracting embedded XML blocks from files. Built for precision and readability - because every tag matters.
         </TextBlock>
 
         <!-- Footer Text -->
