@@ -87,7 +87,57 @@
         <Setter Property="Foreground" Value="{StaticResource AccentRed}"/>
     </Style>
 
-    <!-- 7. TOOLTIP STYLE -->
+    <!-- 7. PROGRESSBAR SCROLLBAR STYLE -->
+    <Style TargetType="ScrollBar">
+        <!-- rail background matches TextBox background -->
+        <Setter Property="Background" Value="{StaticResource ControlBackground}"/>
+        <!-- slim width -->
+        <Setter Property="Width" Value="8"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ScrollBar">
+                    <Grid Background="{TemplateBinding Background}">
+                        <Track Name="PART_Track" IsDirectionReversed="True">
+                            <!-- top/left rail (no arrows) -->
+                            <Track.DecreaseRepeatButton>
+                                <RepeatButton
+                Style="{x:Null}"
+                Background="{StaticResource ControlBackground}"
+                Command="ScrollBar.LineUpCommand"
+                IsTabStop="False"/>
+                            </Track.DecreaseRepeatButton>
+
+                            <!-- the draggable thumb -->
+                            <Track.Thumb>
+                                <Thumb Background="{StaticResource AccentRed}">
+                                    <Thumb.Template>
+                                        <ControlTemplate TargetType="Thumb">
+                                            <Border
+                      Background="{TemplateBinding Background}"
+                      CornerRadius="4"/>
+                                        </ControlTemplate>
+                                    </Thumb.Template>
+                                </Thumb>
+                            </Track.Thumb>
+
+                            <!-- bottom/right rail (no arrows) -->
+                            <Track.IncreaseRepeatButton>
+                                <RepeatButton
+                Style="{x:Null}"
+                Background="{StaticResource ControlBackground}"
+                Command="ScrollBar.LineDownCommand"
+                IsTabStop="False"/>
+                            </Track.IncreaseRepeatButton>
+                        </Track>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+
+
+    <!-- 8. TOOLTIP STYLE -->
     <Style TargetType="ToolTip">
         <Setter Property="Background" Value="#1F1F1F"/>
         <Setter Property="Foreground" Value="{StaticResource TextLight}"/>
