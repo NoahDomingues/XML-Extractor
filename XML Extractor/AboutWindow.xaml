@@ -38,7 +38,8 @@
 
         <!-- Footer Text -->
         <TextBlock FontSize="12"
-                   TextAlignment="Center">
+                   TextAlignment="Center"
+                   ToolTip="© Noah Domingues">
             Created by Noah Domingues • v1.0
         </TextBlock>
 
@@ -57,7 +58,7 @@
            Width="32" Height="32"
            Margin="5"
            Cursor="Hand"
-           ToolTip="Modding Discord"
+           ToolTip="Operation Flashpoint Discord server"
            MouseLeftButtonUp="DiscordIcon_Click"/>
 
             <!-- YouTube -->
