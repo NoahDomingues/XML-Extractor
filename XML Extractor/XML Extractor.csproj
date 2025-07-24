@@ -7,18 +7,24 @@
 		<UseWindowsForms>true</UseWindowsForms>
 		<!-- pulls in System.Windows.Forms -->
 		<RootNamespace>XML_Extractor</RootNamespace>
+		<ApplicationIcon>XMLExtractor.ico</ApplicationIcon>
 	</PropertyGroup>
 	<ItemGroup>
 	  <None Remove="Assets\discord.png" />
 	  <None Remove="Assets\github.png" />
 	  <None Remove="Assets\XMLExtractor.png" />
+	  <None Remove="Assets\XMLExtractor_128.png" />
 	  <None Remove="Assets\youtube.png" />
 	  <None Remove="Resources\RedHatDisplay-Bold.ttf" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Content Include="XMLExtractor.ico" />
 	</ItemGroup>
 	<ItemGroup>
 	  <Resource Include="Assets\discord.png" />
 	  <Resource Include="Assets\github.png" />
 	  <Resource Include="Assets\XMLExtractor.png" />
+	  <Resource Include="Assets\XMLExtractor_128.png" />
 	  <Resource Include="Assets\youtube.png" />
 	  <Resource Include="Resources\RedHatDisplay-Bold.ttf" />
 	</ItemGroup>

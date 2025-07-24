@@ -6,7 +6,7 @@
   Width="600" Height="400"
   MinWidth="480" MinHeight="320"
   Background="{StaticResource WindowBackground}"
-  WindowStartupLocation="CenterScreen" Icon="/Assets/XMLExtractor.png">
+  WindowStartupLocation="CenterScreen" Icon="/Assets/XMLExtractor_128.png">
 
     <Grid Margin="12">
         <Grid.RowDefinitions>
