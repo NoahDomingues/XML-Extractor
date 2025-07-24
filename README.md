@@ -24,7 +24,7 @@ XML Extractor is fully portable—no installer required. Download the latest rel
 
 ## 💡 Usage
 
-<a href="https://discord.gg/Z88NnTgpWU"><img width="100%" alt="XML Extractor UI" src="https://github.com/user-attachments/assets/dbe92afe-619b-453d-aaef-156c546a9050"/></a>
+<a href="https://discord.gg/Z88NnTgpWU"><img width="100%" alt="XML Extractor UI" src="https://github.com/user-attachments/assets/83efbc6e-8421-48fd-9130-cfb952ce7ae0"/></a>
 
 1. Click **Select File…** to choose a single file, or **Select Folder…** to target a directory.  
 2. Hit **Extract** to begin scanning.  
