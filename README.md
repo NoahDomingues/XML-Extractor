@@ -2,7 +2,7 @@
 
 A simple, modern utility for extracting embedded XML blocks from EXE, DLL, and other container files—designed for modders, tool-builders, and anyone who needs to pull out plain-text XML with precision and style.
 
-[<img src="https://github.com/user-attachments/assets/b20a8e62-95f1-4a9c-8d39-609dbde508ad">](https://discord.gg/Z88NnTgpWU)
+[<img src="https://github.com/user-attachments/assets/83949190-fb98-4c92-9db1-361d432d3ef8">](https://discord.gg/Z88NnTgpWU)
 
 ## 📄 XML Extractor
 
