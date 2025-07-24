@@ -1,13 +1,14 @@
 ﻿using System;
 using System.IO;
+using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
-using Microsoft.Win32;                   // WPF OpenFileDialog
-using WinForms = System.Windows.Forms;   // alias for FolderBrowserDialog
+using System.Windows.Navigation;
 using System.Xml;
 using System.Diagnostics;
-using System.Windows.Navigation;
+using Microsoft.Win32;                   // WPF OpenFileDialog
+using WinForms = System.Windows.Forms;   // alias for FolderBrowserDialog
 
 namespace XML_Extractor
 {
@@ -82,91 +83,121 @@ namespace XML_Extractor
             BtnExtract.IsEnabled = false;
         }
 
-        // Single‐file mode: track XML blocks
+        // ─────────────────────────────────────────────────
+        // Single‐file XML extraction: proper prologs only,
+        // any version, safe try/catch
+        // ─────────────────────────────────────────────────
         private async Task ExtractSingleFileAsync(string filePath)
         {
-            string outputDir = PrepareOutputFolder(filePath);
-            if (outputDir == null) return;
-
-            // Read blob, find headers
-            byte[] data = File.ReadAllBytes(filePath);
-            string text = System.Text.Encoding.UTF8.GetString(data);
-            var matches = Regex.Matches(text, @"<\?xml version=""1\.0""\?>");
-            int total = matches.Count;
-
-            Dispatcher.Invoke(() =>
+            try
             {
-                ExtractionProgress.Minimum = 0;
-                ExtractionProgress.Maximum = total;
-                ExtractionProgress.Value = 0;
-                ExtractionProgress.IsIndeterminate = total == 0;
-                ExtractionProgress.Visibility = Visibility.Visible;
-            });
+                // 1) Read file & detect BOM
+                byte[] data = File.ReadAllBytes(filePath);
+                Encoding enc = DetectEncoding(data, out int bomLen);
+                string text = enc.GetString(data, bomLen, data.Length - bomLen);
 
-            int written = 0;
-            await Task.Run(() =>
-            {
-                for (int i = 0; i < total; i++)
+                // 2) Find all <?xml version="..."?> occurrences (any version)
+                var regex = new Regex(@"<\?xml\s+version\s*=\s*['""](?<ver>[^'""]+)['""].*?\?>",
+                                         RegexOptions.IgnoreCase);
+                var matches = regex.Matches(text);
+                int total = matches.Count;
+
+                if (total == 0)
                 {
-                    int start = matches[i].Index;
-                    string snippet = text.Substring(start);
-                    var rootMatch = Regex.Match(
-                        snippet,
-                        @"<\?xml version=""1\.0""\?>\s*<(\w+)"
-                    );
-                    if (!rootMatch.Success)
-                    {
-                        Log($"⚠️ Unable to find root tag in block {i + 1}");
-                        Dispatcher.Invoke(() => ExtractionProgress.Value++);
-                        continue;
-                    }
-
-                    string rootTag = rootMatch.Groups[1].Value;
-                    string closing = $"</{rootTag}>";
-                    int endIdx = snippet.IndexOf(closing, StringComparison.Ordinal);
-                    if (endIdx < 0)
-                    {
-                        Log($"⚠️ No closing </{rootTag}> in block {i + 1}");
-                        Dispatcher.Invoke(() => ExtractionProgress.Value++);
-                        continue;
-                    }
-
-                    string rawXml = snippet.Substring(0, endIdx + closing.Length);
-                    try
-                    {
-                        var doc = new XmlDocument();
-                        doc.LoadXml(rawXml);
-
-                        var settings = new XmlWriterSettings
-                        {
-                            Indent = true,
-                            IndentChars = "    ",
-                            OmitXmlDeclaration = false,
-                            NewLineChars = "\n",
-                            NewLineHandling = NewLineHandling.Replace
-                        };
-
-                        written++;
-                        string filename = $"{rootTag}_{written:00}.xml";
-                        string outPath = Path.Combine(outputDir, filename);
-                        using var writer = XmlWriter.Create(outPath, settings);
-                        doc.Save(writer);
-
-                        Log($"📄 Saved {filename}");
-                    }
-                    catch (Exception ex)
-                    {
-                        Log($"❌ Error formatting block {i + 1}: {ex.Message}");
-                    }
-                    finally
-                    {
-                        Dispatcher.Invoke(() => ExtractionProgress.Value++);
-                    }
+                    Log("❌ No XML prologs found.");
+                    return;
                 }
-            });
+                Log($"Found {total} XML prolog(s) (any version).");
+
+                // 3) Prepare per-file output folder
+                string outputDir = PrepareOutputFolder(filePath);
+                if (outputDir == null) return;  // user skipped
+
+                // 4) Setup progress bar
+                Dispatcher.Invoke(() =>
+                {
+                    ExtractionProgress.Minimum = 0;
+                    ExtractionProgress.Maximum = total;
+                    ExtractionProgress.Value = 0;
+                    ExtractionProgress.IsIndeterminate = false;
+                    ExtractionProgress.Visibility = Visibility.Visible;
+                });
+
+                int written = 0;
+
+                // 5) Iterate each prolog match
+                await Task.Run(() =>
+                {
+                    for (int i = 0; i < total; i++)
+                    {
+                        int start = matches[i].Index;
+                        string snippet = text.Substring(start);
+
+                        // 6) Extract root tag name after prolog
+                        var rootMatch = Regex.Match(
+                          snippet,
+                          @"<\?xml\b.*?\?>\s*<(?<tag>[A-Za-z_:][\w:\-\.]*)",
+                          RegexOptions.Singleline);
+                        if (!rootMatch.Success)
+                        {
+                            Log($"⚠️ Could not find root tag in prolog #{i + 1}");
+                            Dispatcher.Invoke(() => ExtractionProgress.Value++);
+                            continue;
+                        }
+
+                        string rootTag = rootMatch.Groups["tag"].Value;
+                        string closing = $"</{rootTag}>";
+
+                        int endIdx = snippet.IndexOf(closing, StringComparison.Ordinal);
+                        if (endIdx < 0)
+                        {
+                            Log($"⚠️ No closing </{rootTag}> for prolog #{i + 1}");
+                            Dispatcher.Invoke(() => ExtractionProgress.Value++);
+                            continue;
+                        }
+
+                        string rawXml = snippet.Substring(0, endIdx + closing.Length);
+
+                        try
+                        {
+                            var doc = new XmlDocument();
+                            doc.LoadXml(rawXml);
+
+                            var settings = new XmlWriterSettings
+                            {
+                                Indent = true,
+                                IndentChars = "    ",
+                                OmitXmlDeclaration = false,
+                                NewLineChars = "\n",
+                                NewLineHandling = NewLineHandling.Replace
+                            };
+
+                            written++;
+                            string filename = $"{rootTag}_{written:00}.xml";
+                            string outPath = Path.Combine(outputDir, filename);
+                            using var writer = XmlWriter.Create(outPath, settings);
+                            doc.Save(writer);
+
+                            Log($"📄 Saved {filename}");
+                        }
+                        catch (Exception exBlock)
+                        {
+                            Log($"❌ XML parse error in block #{i + 1}: {exBlock.Message}");
+                        }
+                        finally
+                        {
+                            Dispatcher.Invoke(() => ExtractionProgress.Value++);
+                        }
+                    }
+                });
+            }
+            catch (Exception ex)
+            {
+                Log($"❌ Unexpected error: {ex.Message}");
+            }
         }
 
-        // Folder‐mode: track file count
+        // Folder‐mode: just calls single‐file extractor for each file
         private async Task ExtractFolderAsync(string folder)
         {
             var files = Directory.GetFiles(folder);
@@ -188,37 +219,59 @@ namespace XML_Extractor
             }
         }
 
-        // Prepares (and prompts) the output subfolder. Returns null on cancel.
+        // BOM detection helper (UTF-8/16LE/16BE/32)
+        private static Encoding DetectEncoding(byte[] data, out int bomLength)
+        {
+            bomLength = 0;
+            if (data.Length >= 3 &&
+                data[0] == 0xEF && data[1] == 0xBB && data[2] == 0xBF)
+            {
+                bomLength = 3;
+                return Encoding.UTF8;
+            }
+            if (data.Length >= 2 &&
+                data[0] == 0xFF && data[1] == 0xFE)
+            {
+                bomLength = 2;
+                return Encoding.Unicode;  // UTF-16 LE
+            }
+            if (data.Length >= 2 &&
+                data[0] == 0xFE && data[1] == 0xFF)
+            {
+                bomLength = 2;
+                return Encoding.BigEndianUnicode; // UTF-16 BE
+            }
+            if (data.Length >= 4 &&
+                data[0] == 0xFF && data[1] == 0xFE &&
+                data[2] == 0x00 && data[3] == 0x00)
+            {
+                bomLength = 4;
+                return Encoding.UTF32;
+            }
+            return Encoding.UTF8;  // default
+        }
+
+        // Prepares & prompts per‐file output folder
         private string PrepareOutputFolder(string filePath)
         {
-            // 1. Base directory and original filename
             string dir = Path.GetDirectoryName(filePath)!;
-            string fileName = Path.GetFileName(filePath);      // e.g. "OFDR.exe"
-
-            // 2. Replace only the last '.' with '_'
+            string fileName = Path.GetFileName(filePath);
             int dotIndex = fileName.LastIndexOf('.');
             string folderName = dotIndex >= 0
-                ? fileName.Substring(0, dotIndex)
-                  + "_"
-                  + fileName.Substring(dotIndex + 1)        // e.g. "OFDR_exe"
-                : fileName;                                 // no extension case
-
+                ? fileName.Substring(0, dotIndex) + "_" + fileName.Substring(dotIndex + 1)
+                : fileName;
             string outputDir = Path.Combine(dir, folderName);
 
-            // 3. Prompt if folder already exists
             if (Directory.Exists(outputDir))
             {
                 var result = MessageBox.Show(
-                    $"Output folder '{outputDir}' already exists.\n\nOverwrite?",
-                    "Folder Exists",
-                    MessageBoxButton.YesNo,
-                    MessageBoxImage.Warning
+                  $"Output folder '{outputDir}' already exists.\n\nOverwrite?",
+                  "Folder Exists",
+                  MessageBoxButton.YesNo,
+                  MessageBoxImage.Warning
                 );
-
                 if (result == MessageBoxResult.Yes)
-                {
                     Directory.Delete(outputDir, recursive: true);
-                }
                 else
                 {
                     Log($"⚠️ Skipped '{fileName}'");
@@ -226,12 +279,11 @@ namespace XML_Extractor
                 }
             }
 
-            // 4. Create & return the new folder path
             Directory.CreateDirectory(outputDir);
             return outputDir;
         }
 
-        // About link click handler
+        // Link handlers
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
         {
             Process.Start(new ProcessStartInfo(e.Uri.AbsoluteUri) { UseShellExecute = true });
@@ -242,6 +294,5 @@ namespace XML_Extractor
         {
             new AboutWindow { Owner = this }.ShowDialog();
         }
-
     }
 }
