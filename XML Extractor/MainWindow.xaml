@@ -45,6 +45,7 @@
             <Button
         Grid.Column="0"
         x:Name="BtnSelectFile"
+        ToolTip="Extract XMLs from a file"
         Click="BtnSelectFile_Click"
         HorizontalAlignment="Stretch"
         Margin="0,0,4,0">
@@ -54,6 +55,7 @@
             <Button
         Grid.Column="1"
         x:Name="BtnSelectFolder"
+        ToolTip="Extract XMLs from all files in a folder"
         Click="BtnSelectFolder_Click"
         HorizontalAlignment="Stretch"
         Margin="4,0,0,0">
@@ -65,6 +67,7 @@
         <Button
       Grid.Row="2"
       x:Name="BtnExtract"
+      ToolTip="Begin extracting XMLs from the selected file or folder"
       Click="BtnExtract_Click"
       HorizontalAlignment="Stretch"
       Margin="0,8,0,0"
@@ -76,6 +79,7 @@
         <ProgressBar
       Grid.Row="3"
       x:Name="ExtractionProgress"
+      ToolTip="Progress"
       Minimum="0"
       Maximum="1"
       Value="0"/>
@@ -84,6 +88,7 @@
         <TextBox
       Grid.Row="4"
       x:Name="LogBox"
+      ToolTip="Logs"
       Margin="0,8,0,0"
       TextWrapping="Wrap"
       VerticalScrollBarVisibility="Auto"
@@ -102,7 +107,7 @@
         </Hyperlink>
             </TextBlock>
 
-            <TextBlock Margin="0,0,10,0" VerticalAlignment="Center" ToolTip="Modding Community Discord">
+            <TextBlock Margin="0,0,10,0" VerticalAlignment="Center" ToolTip="Operation Flashpoint Discord server">
         <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"
                    NavigateUri="https://discord.gg/Z88NnTgpWU"
                    Foreground="{StaticResource AccentRed}">
@@ -110,7 +115,7 @@
         </Hyperlink>
             </TextBlock>
 
-            <TextBlock VerticalAlignment="Center" ToolTip="GitHub Repository">
+            <TextBlock VerticalAlignment="Center" ToolTip="GitHub repository">
         <Hyperlink RequestNavigate="Hyperlink_RequestNavigate"
                    NavigateUri="https://github.com/NoahDomingues/XML-Extractor"
                    Foreground="{StaticResource AccentRed}">
