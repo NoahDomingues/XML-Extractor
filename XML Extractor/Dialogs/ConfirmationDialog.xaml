@@ -1,0 +1,34 @@
+﻿<Window x:Class="XML_Extractor.Dialogs.ConfirmationDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        SizeToContent="WidthAndHeight"
+        WindowStartupLocation="CenterOwner"
+        Background="{StaticResource ControlBackground}"
+        Foreground="{StaticResource TextLight}"
+        FontFamily="{StaticResource RedHatBold}">
+
+    <Border Background="{StaticResource ControlBackground}"
+          BorderBrush="{StaticResource AccentRed}"
+          BorderThickness="1"
+          CornerRadius="4"
+          Padding="20">
+        <StackPanel>
+
+            <TextBlock x:Name="MessageTextBlock"
+                 Text="Are you sure?"
+                 FontSize="14"
+                 TextWrapping="Wrap"
+                 Margin="0,0,0,12"/>
+
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button x:Name="NoButton" Content="No" Width="80"
+                Click="NoButton_Click"/>
+                <Button x:Name="YesButton" Content="Yes" Width="80"
+                Click="YesButton_Click"/>
+            </StackPanel>
+
+        </StackPanel>
+    </Border>
+</Window>

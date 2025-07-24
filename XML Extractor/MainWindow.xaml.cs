@@ -263,14 +263,15 @@ namespace XML_Extractor
 
             if (Directory.Exists(outputDir))
             {
-                var result = MessageBox.Show(
-                  $"Output folder '{outputDir}' already exists.\n\nOverwrite?",
-                  "Folder Exists",
-                  MessageBoxButton.YesNo,
-                  MessageBoxImage.Warning
+                var dlg = new Dialogs.ConfirmationDialog(
+                    $"Output folder '{outputDir}' already exists.\n\nOverwrite?",
+                    "Folder Exists"
                 );
-                if (result == MessageBoxResult.Yes)
-                    Directory.Delete(outputDir, recursive: true);
+                dlg.Owner = this;
+                dlg.ShowDialog();
+                
+                if (dlg.Result == true)
+                    Directory.Delete(outputDir, true);
                 else
                 {
                     Log($"⚠️ Skipped '{fileName}'");
