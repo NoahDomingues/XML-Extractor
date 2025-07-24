@@ -1,6 +1,6 @@
 # 🔒 Security
 
-[<img src="https://github.com/user-attachments/assets/5099c8ea-53ea-4609-b53b-91b7668f255a">](https://discord.gg/Z88NnTgpWU)
+[<img src="https://github.com/user-attachments/assets/83949190-fb98-4c92-9db1-361d432d3ef8">](https://discord.gg/Z88NnTgpWU)
 
 We take the security of our software products and services seriously, including **[XML Extractor](https://github.com/NoahDomingues/XML-Extractor)**.
 
