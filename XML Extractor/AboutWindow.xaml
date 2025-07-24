@@ -9,7 +9,7 @@
         Background="{StaticResource WindowBackground}"
         Foreground="{StaticResource TextLight}"
         FontFamily="{StaticResource RedHatBold}"
-        ShowInTaskbar="False">
+        ShowInTaskbar="False" Icon="/Assets/XMLExtractor.png">
 
     <StackPanel Margin="20" HorizontalAlignment="Center">
 
