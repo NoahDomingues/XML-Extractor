@@ -77,7 +77,6 @@ namespace XML_Extractor
                 await ExtractFolderAsync(_folderPath);
 
             Log("✅ All done.");
-            ExtractionProgress.Visibility = Visibility.Collapsed;
             BtnSelectFile.IsEnabled = true;
             BtnSelectFolder.IsEnabled = true;
             BtnExtract.IsEnabled = false;
