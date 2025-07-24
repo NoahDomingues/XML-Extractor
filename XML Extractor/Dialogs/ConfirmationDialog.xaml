@@ -1,33 +1,84 @@
 ﻿<Window x:Class="XML_Extractor.Dialogs.ConfirmationDialog"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Confirmation"
         WindowStyle="None"
         ResizeMode="NoResize"
         SizeToContent="WidthAndHeight"
         WindowStartupLocation="CenterOwner"
         Background="{StaticResource ControlBackground}"
         Foreground="{StaticResource TextLight}"
-        FontFamily="{StaticResource RedHatBold}">
+        FontFamily="{StaticResource RedHatBold}"
+        ShowInTaskbar="False">
 
-    <Border Background="{StaticResource ControlBackground}"
+    <!-- Local button style for uniform sizing -->
+    <Window.Resources>
+        <Style x:Key="DialogButtonStyle" TargetType="Button">
+            <Setter Property="MinWidth"  Value="80"/>
+            <Setter Property="MinHeight" Value="40"/>
+            <Setter Property="FontSize"  Value="14"/>
+            <Setter Property="Background" Value="{StaticResource AccentRed}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextLight}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Cursor"     Value="Hand"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                    CornerRadius="4">
+                            <ContentPresenter HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+            <Style.Triggers>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="Opacity" Value="0.9"/>
+                </Trigger>
+                <Trigger Property="IsPressed" Value="True">
+                    <Setter Property="Opacity" Value="0.8"/>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </Window.Resources>
+
+    <Border Padding="20"
+          Background="{StaticResource ControlBackground}"
           BorderBrush="{StaticResource AccentRed}"
           BorderThickness="1"
-          CornerRadius="4"
-          Padding="20">
+          CornerRadius="4">
         <StackPanel>
 
+            <!-- Message -->
             <TextBlock x:Name="MessageTextBlock"
                  Text="Are you sure?"
                  FontSize="14"
                  TextWrapping="Wrap"
                  Margin="0,0,0,12"/>
 
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                <Button x:Name="NoButton" Content="No" Width="80"
+            <!-- Buttons side by side, uniform size -->
+            <Grid HorizontalAlignment="Right">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition/>
+                </Grid.ColumnDefinitions>
+
+                <!-- No button -->
+                <Button x:Name="NoButton"
+                Style="{StaticResource DialogButtonStyle}"
+                Content="No"
+                Grid.Column="0"
                 Click="NoButton_Click"/>
-                <Button x:Name="YesButton" Content="Yes" Width="80"
+
+                <!-- Yes button with left-margin for spacing -->
+                <Button x:Name="YesButton"
+                Style="{StaticResource DialogButtonStyle}"
+                Content="Yes"
+                Grid.Column="1"
+                Margin="8,0,0,0"
                 Click="YesButton_Click"/>
-            </StackPanel>
+            </Grid>
 
         </StackPanel>
     </Border>
