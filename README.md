@@ -6,7 +6,7 @@ A simple, modern utility for extracting embedded XML blocks from EXE, DLL, and o
 
 ## 📄 XML Extractor
 
-XML Extractor is a lightweight desktop tool that scans any file for valid raw XML files, extracts it, formats it, and saves it. It can be used for various purposes, including game modding - such as for Codemasters' 2009 title, **Operation Flashpoint: Dragon Rising**.
+XML Extractor is a lightweight desktop tool that scans any file for valid raw XML files, extracts them, formats them, and saves them. It can be used for various purposes, including game modding - such as for Codemasters' 2009 title, **Operation Flashpoint: Dragon Rising**.
 
 - Per-file output folders named after your source (dots → underscores)  
 - Animated, always-visible progress bar  
