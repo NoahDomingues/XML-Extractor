@@ -6,9 +6,8 @@ A simple, modern utility for extracting embedded XML blocks from EXE, DLL, and o
 
 ## 📄 XML Extractor
 
-XML Extractor is a lightweight desktop tool that scans any file for valid `<?xml version="…">` prologs, pulls out each XML fragment, pretty-prints it, and saves it to its own folder. Whether you’re reverse-engineering game executables, unpacking proprietary containers, or simply mining text files for embedded XML, this app makes it batch-friendly, safe, and visually clear.
+XML Extractor is a lightweight desktop tool that scans any file for valid raw XML files, extracts it, formats it, and saves it. It can be used for various purposes, including game modding - such as for Codemasters' 2009 title, **Operation Flashpoint: Dragon Rising**.
 
-Built with WPF and styled in a modern dark/red theme, XML Extractor features:  
 - Per-file output folders named after your source (dots → underscores)  
 - Animated, always-visible progress bar  
 - Overwrite prompts in a custom, on-brand dialog  
@@ -31,21 +30,20 @@ XML Extractor is fully portable—no installer required. Download the latest rel
 3. Watch the red progress bar fill, and follow detailed messages in the log.  
 4. Extracted XML files appear in `YourFileName_ext` folders, named like `RootTag_01.xml`, `RootTag_02.xml`, etc.  
 
-XML Extractor never hides the progress bar, and prompts you before overwriting existing output folders.  
+XML Extractor will prompt you before overwriting existing output folders.  
 
 ## 🛠️ Features
 
-- Extracts only valid XML with any `version="…"` attribute  
+- Extracts only valid XML  
 - Single-file and batch-folder modes  
 - Automatic BOM detection (UTF-8/16LE/16BE/32)  
 - Pretty-printed output with consistent indentation  
-- Dark/red WPF theme with embedded custom font  
-- Always-visible progress indicator  
-- Themed overwrite confirmation dialog  
-
+- Modern UI
+- Logs & progress updates
+- 
 ## 🤝 Support
 
-Questions, bugs, or feature requests? Join our **[Discord server](https://discord.gg/Z88NnTgpWU)** or open an issue on GitHub! Contributions and pull requests are always welcome.
+Questions, bugs, or feature requests? Join our **[Discord server](https://discord.gg/Z88NnTgpWU)** or open an issue on GitHub! Pull requests are always welcome.
 
 [<img src="https://github.com/user-attachments/assets/f61046f5-1dc5-4b0c-87f8-4a94d6cbac96">](https://discord.gg/Z88NnTgpWU)
 
